@@ -35,7 +35,7 @@
       </table>
       
       <div id="book_comment_<%=@book.id%>">
-      <%=render 'comments/comment',book: @book,book_comment: @book_comment%>
+      <%=render 'book_comments/index',book: @book,book_comment: @book_comment%>
       </div>
       <div>
         <%=form_with model: [@book,@book_comment],remote:true do |f|%>
