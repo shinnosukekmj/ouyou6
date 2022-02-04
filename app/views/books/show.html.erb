@@ -33,31 +33,16 @@
           </td>
         </tr>
       </table>
-      <table cellpadding="5">
-       <%@book.book_comments.each do |book_comment|%>
-        <tr>
-          <td>
-            <%=link_to (book_comment.user)do%>
-              <%=image_tag book_comment.user.get_profile_image("50x50")%><br>
-              <%=book_comment.user.name%>
-            <%end%>
-          </td>
-          <td><%=book_comment.comment%></td>
-          <td>
-          <%if book_comment.user==current_user%>
-            <%=link_to book_book_comment_path(book_comment.book,book_comment),method: :delete do%>
-              <button type="button" class="btn btn-danger">Destroy</button>
-            <%end%>
-          <%end%>
-          </td>
-        </tr>
-       <%end%>
-      </table>
-       
-      <%=form_with model: [@book,@book_comment],local:true do |f|%>
-       <%=f.text_area :comment,cols:80,rows:5%><br>
-       <%=f.submit'送信'%>
-      <%end%>
+      
+      <div id="book_comment_<%=@book.id%>">
+      <%=render 'comments/comment',book: @book,book_comment: @book_comment%>
+      </div>
+      <div>
+        <%=form_with model: [@book,@book_comment],remote:true do |f|%>
+            <%=f.text_area :comment,cols:80,rows:5%><br>
+            <%=f.submit'送信'%>
+        <%end%>
+      </div>
     </div>
   </div>
 </div>
